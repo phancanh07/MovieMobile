@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/amaranth_bold</item>
+        <item>@font/archivo_narrow_bold</item>
+        <item>@font/artifika</item>
+        <item>@font/baloo_da</item>
+        <item>@font/baloo_tamma</item>
+        <item>@font/baumans</item>
+        <item>@font/berkshire_swash</item>
+        <item>@font/bubblegum_sans</item>
+        <item>@font/chewy</item>
+    </array>
+</resources>

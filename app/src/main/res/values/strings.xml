@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MovieMobile</string>
+    <string name="ation_home"> Home</string>
+    <string name="ation_favorite"> Favorite</string>
+    <string name="ation_about">About </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
