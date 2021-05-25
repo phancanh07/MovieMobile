@@ -12,8 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -23,9 +22,9 @@
             android:weightSum="6">
 
             <ImageView
-                android:id="@+id/postermovie"
+                android:id="@+id/postertvshow"
                 android:layout_width="140dp"
-                android:layout_height="190dp"
+                android:layout_height="230dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_weight="0"
@@ -34,16 +33,15 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_weight="6"
-                android:gravity="center"
                 android:orientation="vertical"
                 android:weightSum="3">
 
 
                 <TextView
-                    android:id="@+id/name_movie"
+                    android:id="@+id/name_tvshow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/baloo_paaji"
@@ -52,7 +50,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/theloai_movie"
+                    android:id="@+id/theloai_tvshow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/baloo_paaji"
@@ -61,7 +59,7 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/movie_country"
+                    android:id="@+id/tvshow_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/chewy"
@@ -70,23 +68,55 @@
                     android:textSize="18dp" />
 
                 <TextView
-                    android:id="@+id/day_movie"
+                    android:id="@+id/day_tvshow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/chewy"
+                    android:text="Day:"
                     android:textColor="#E3E4EC"
-
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/last_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/chewy"
+                    android:text="Day:"
+                    android:textColor="#E3E4EC"
                     android:textSize="18dp" />
 
+
                 <TextView
-                    android:id="@+id/movie_language"
+                    android:id="@+id/tv_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/chewy"
                     android:text="Language :"
                     android:textColor="#E3E4EC"
                     android:textSize="18dp" />
-
+                <TextView
+                    android:id="@+id/daodien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/chewy"
+                    android:text="Created By :"
+                    android:textColor="#E3E4EC"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/total_episodes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/chewy"
+                    android:text="Episodes :"
+                    android:textColor="#E3E4EC"
+                    android:textSize="18dp" />
+                <TextView
+                    android:id="@+id/total_season"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/chewy"
+                    android:text="Season :"
+                    android:textColor="#E3E4EC"
+                    android:textSize="18dp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -104,7 +134,7 @@
                 android:textSize="20dp" />
 
             <TextView
-                android:id="@+id/movie_overview"
+                android:id="@+id/tvshow_overview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"

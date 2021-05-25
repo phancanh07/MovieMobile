@@ -1,5 +1,7 @@
 package com.example.moviemobile.view.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +21,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.example.moviemobile.MainActivity;
 import com.example.moviemobile.R;
 import com.example.moviemobile.adapter.DetailMovieAdapter;
 import com.example.moviemobile.adapter.MovieListAdapter;
@@ -27,6 +31,7 @@ import com.example.moviemobile.adapter.PhotoSliderAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.IfMovieList;
+import com.example.moviemobile.controller.Test;
 import com.example.moviemobile.model.PhotoSlider;
 import com.example.moviemobile.model.movie.Result;
 import com.example.moviemobile.model.rating.TopRating;
@@ -45,17 +50,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class HomeFragment extends Fragment implements CallBackItem {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private ProgressBar progressBar;
     private ViewPager viewPager;
     private CircleIndicator circleIndicator;
@@ -79,36 +77,12 @@ public class HomeFragment extends Fragment implements CallBackItem {
     boolean load = true;
     private NestedScrollView nestedScrollView;
     boolean loadr = true;
-    List<Result> trendList = new ArrayList<>();
+    List<Result> trendList=new ArrayList<>();
     List<Result> ratingList = new ArrayList<>();
+    Test test;
+    MainActivity mainActivity;
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,14 +90,7 @@ public class HomeFragment extends Fragment implements CallBackItem {
         initUI(view);
         getMovieTrending(PAGE);
         getMovieRating(PAGER);
-
-
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-
             @Override
             public void onScrolled(@NonNull @NotNull RecyclerView v, int dx, int scrollY) {
                 super.onScrolled(recyclerView, dx, scrollY);
@@ -138,31 +105,32 @@ public class HomeFragment extends Fragment implements CallBackItem {
                     }
                 } else if (!load && (firsVisitableItemCount + visitableCount) >= totalitemCount) {
                     getMovieTrending(PAGE);
-                    progressBar.setVisibility(View.VISIBLE);
                     load = true;
                 }
             }
         });
-        recyclerViewRating.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                firsVisitableItemCountt = layoutManagerr.findFirstCompletelyVisibleItemPosition();
-                totalitemCountt = layoutManagerr.getItemCount();
-                visitableCountt = layoutManagerr.getChildCount();
-                if (loadr) {
-                    if (totalitemCountt > previousTotalt) {
-                        previousTotalt = totalitemCountt;
-                        PAGER++;
-                        loadr = false;
-                    }
-                } else if (!loadr && (firsVisitableItemCountt + visitableCountt) >= totalitemCountt) {
-                    getMovieRating(PAGER);
-                    progressBar.setVisibility(View.VISIBLE);
-                    loadr = true;
-                }
-            }
-        });
+
+
+//        recyclerViewRating.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                firsVisitableItemCountt = layoutManagerr.findFirstCompletelyVisibleItemPosition();
+//                totalitemCountt = layoutManagerr.getItemCount();
+//                visitableCountt = layoutManagerr.getChildCount();
+//                if (loadr) {
+//                    if (totalitemCountt > previousTotalt) {
+//                        previousTotalt = totalitemCountt;
+//                        PAGER++;
+//                        loadr = false;
+//                    }
+//                } else if (!loadr && (firsVisitableItemCountt + visitableCountt) >= totalitemCountt) {
+//                    getMovieRating(PAGER);
+//                    progressBar.setVisibility(View.VISIBLE);
+//                    loadr = true;
+//                }
+//            }
+//        });
         return view;
     }
 
@@ -188,14 +156,13 @@ public class HomeFragment extends Fragment implements CallBackItem {
             public void onResponse(Call<MovieTrend> call, Response<MovieTrend> response) {
                 if (response.isSuccessful()) {
                     progressBar.setVisibility(View.GONE);
-                    trendList.addAll(response.body().getResults());
+                    trendList = response.body().getResults();
                     layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                    movieListAdapter = new MovieListAdapter(trendList, getContext(), HomeFragment.this::onClickItem);
+                    movieListAdapter = new MovieListAdapter(response.body().getResults(), getContext(), HomeFragment.this::onClickItem);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(true);
                     recyclerView.setAdapter(movieListAdapter);
                     movieListAdapter.notifyDataSetChanged();
-
                 }
             }
 
@@ -277,8 +244,14 @@ public class HomeFragment extends Fragment implements CallBackItem {
         }
     }
 
+
     @Override
     public void onClickItem(int positon, String id) {
-        startActivity(new Intent(getContext(), DetailMovieActivity.class));
+        mainActivity.id = id;
+        Intent intent = new Intent(getContext(), DetailMovieActivity.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("KEY_ID", id);
+//        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="180dp"
+                android:layout_height="300dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/avatar" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/name_character_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="tên"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="giới tính"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/birday"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="ngày sinh"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/deatday"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="ngày mất"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/place_day"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="nơi sinh"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/phobien"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="độ phổ biến"
+                    android:textSize="14dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Biography"
+            android:textColor="#EC0909"
+            android:textSize="25dp" />
+
+        <com.borjabravo.readmoretextview.ReadMoreTextView
+            android:id="@+id/biography"
+            app:trimCollapsedText="@string/read_more"
+            app:trimExpandedText="@string/read_less"
+            app:trimMode="trimModeLength"
+            android:textSize="15dp"
+            android:text="àkasnkfnsssdddddddddddddddddddddddddddddddddddddd"
+            android:layout_margin="7dp"
+            app:trimLength="100"
+            app:colorClickableText="#F40404"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

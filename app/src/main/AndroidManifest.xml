@@ -11,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMobile">
+        <activity android:name=".view.activity.TvShowDetailActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".view.activity.DetailCharacterActivity"
+            android:parentActivityName=".view.activity.DetailMovieActivity" />
         <activity
             android:name=".view.activity.DetailMovieActivity"
             android:parentActivityName=".MainActivity"

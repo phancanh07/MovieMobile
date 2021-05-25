@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
+import com.example.moviemobile.controller.Test;
 import com.example.moviemobile.view.fragment.AboutFragment;
 import com.example.moviemobile.view.fragment.FavoriteFragment;
 import com.example.moviemobile.view.fragment.HomeFragment;
+import com.example.moviemobile.view.fragment.TVShowFragment;
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private Fragment fragment = null;
     private SNavigationDrawer sNavigationDrawer;
     Class fragmentClass;
+    public static String id = "";
 
 
     @Override
@@ -44,8 +48,12 @@ public class MainActivity extends AppCompatActivity {
                         fragmentClass = FavoriteFragment.class;
                         break;
                     }
-                    case 2: {
+                    case 3: {
                         fragmentClass = AboutFragment.class;
+                        break;
+                    }
+                    case 2: {
+                        fragmentClass = TVShowFragment.class;
                         break;
                     }
 
@@ -96,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
         List<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Home", R.drawable.news_bg));
         menuItems.add(new MenuItem("Favorite", R.drawable.feed_bg));
+        menuItems.add(new MenuItem("TVshow", R.drawable.message_bg));
         menuItems.add(new MenuItem("About", R.drawable.message_bg));
+
         sNavigationDrawer.setMenuItemList(menuItems);
         sNavigationDrawer.setAppbarTitleTV("Movie");
         fragmentClass = HomeFragment.class;

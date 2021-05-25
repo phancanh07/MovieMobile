@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.HomeFragment">
+    tools:context=".view.fragment.TVShowFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
-            android:padding="5dp"
+
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -29,12 +28,12 @@
                     android:orientation="vertical">
 
                     <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/viewPager_Home"
+                        android:id="@+id/viewPager_tvshow"
                         android:layout_width="match_parent"
-                        android:layout_height="220dp" />
+                        android:layout_height="230dp" />
 
                     <me.relex.circleindicator.CircleIndicator
-                        android:id="@+id/circleIndicatior_home"
+                        android:id="@+id/circleIndicatior_tvshow"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_gravity="center_horizontal"
@@ -52,37 +51,26 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/amaranth_bold"
-                        android:text="BEST MOVIE TREND 2021"
+                        android:text="TV SHOWS ON TMDB"
                         android:textSize="20dp" />
+
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView_trend_movie"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal" />
-                    <ProgressBar
-                        android:id="@+id/progressBarr"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
+                        android:layout_width="match_parent"
+                        android:id="@+id/tv_showe_top"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/baloo_da"
-                        android:text="MOVIE RATING 2021"
+                        android:fontFamily="@font/amaranth_bold"
+                        android:text="BEST TV SHOW TRENDING"
                         android:textSize="20dp" />
-
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerView_rating_movie"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_weight="1" />
-
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/tv_show_trending"
+                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

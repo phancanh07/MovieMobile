@@ -55,6 +55,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'
     implementation  'com.borjabravo:readmoretextview:2.1.0'
     implementation 'com.github.gifffert:ExpandableTextView:0.1.6'
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
 
 
 

@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#515050">
+    tools:context=".view.activity.TvShowDetailActivity">
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
+        android:id="@+id/appbar_layout_tvshow"
         android:layout_width="match_parent"
         android:outlineSpotShadowColor="#FAF6F6"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.AppCompat.Light">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/collapsing_detail"
+            android:id="@+id/collapsing_detail_tvshow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:contentScrim="#455EEA"
@@ -22,7 +22,7 @@
             app:titleTextAppearance="@font/school">
 
             <ImageView
-                android:id="@+id/image_baner"
+                android:id="@+id/image_baner_tvshow"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:scaleType="centerCrop"
@@ -34,7 +34,7 @@
                 android:layout_height="48dp" />
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_detail"
+                android:id="@+id/toolbar_detail_tvshow"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarColoredBackArrow"
@@ -57,22 +57,22 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/item_recylerview_movie"
+                android:id="@+id/item_recylerview_tvshow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/baloo_paaji"
                 android:text="CAST"
-                android:textColor="#F6E7E7"
+                android:textColor="#F30404"
                 android:textSize="23dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:id="@+id/recylerView_character"
+                android:id="@+id/recylerView_tv_character"
                 android:layout_height="match_parent" />
 
             <TextView
@@ -81,12 +81,9 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/baloo_paaji"
                 android:text="RALATED MOVIES"
-                android:textColor="#F6E7E7"
+                android:textColor="#F60303"
                 android:textSize="23dp" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/recylerView_movie_ralated"
-                android:layout_height="match_parent" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
