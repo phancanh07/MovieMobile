@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green">#2C2C2C</color>
     <color name="custom_color">#FFFFFFFF</color>
+    <color name="login_bk_color">#fff</color>
 </resources>

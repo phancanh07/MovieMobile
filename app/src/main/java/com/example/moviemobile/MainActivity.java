@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
@@ -13,6 +15,11 @@ import com.example.moviemobile.view.fragment.AboutFragment;
 import com.example.moviemobile.view.fragment.FavoriteFragment;
 import com.example.moviemobile.view.fragment.HomeFragment;
 import com.example.moviemobile.view.fragment.TVShowFragment;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 
@@ -100,15 +107,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
         sNavigationDrawer = findViewById(R.id.navigationDrawer);
         List<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Home", R.drawable.news_bg));
         menuItems.add(new MenuItem("Favorite", R.drawable.feed_bg));
         menuItems.add(new MenuItem("TVshow", R.drawable.message_bg));
         menuItems.add(new MenuItem("About", R.drawable.message_bg));
-
         sNavigationDrawer.setMenuItemList(menuItems);
         sNavigationDrawer.setAppbarTitleTV("Movie");
+        // FirebaseAuth.getInstance().signOut();
+
+        //
+
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        if (signInAccount != null) {
+            String personName = signInAccount.getDisplayName();
+            String personEmail = signInAccount.getEmail();
+            Log.d("personEmail", String.valueOf(signInAccount.getPhotoUrl()));
+        }
+        //
+
         fragmentClass = HomeFragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
