@@ -40,7 +40,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
         initUI();
         button.setOnClickListener(this::onClick);
-
     }
 
     private void initUI() {

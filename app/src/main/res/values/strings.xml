@@ -14,4 +14,23 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <array name="colors_1">
+        <item>#F30606</item>
+        <item>#8CF315</item>
+    </array>
+
+    <array name="colors_2">
+        <item>#c2c200</item>
+    </array>
+
+    <array name="colors_3">
+        <item>#531ac5</item>
+    </array>
+
+    <array name="colors_4">
+        <item>#4EFA2F</item>
+        <item>#2B52F6</item>
+        <item>#FF6229</item>
+        <item>#153AF8</item>
+    </array>
 </resources>

@@ -12,19 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMobile">
-        <activity android:name=".view.activity.ForgotPassActivity"></activity>
+        <activity android:name=".view.activity.SplasSceenActivity">
+
+        </activity>
+        <activity android:name=".view.activity.ForgotPassActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-7345408921633152~3516460958" />
 
-        <activity android:name=".view.activity.RegisterActivity"></activity>
+        <activity android:name=".view.activity.RegisterActivity" />
         <activity
             android:name=".view.activity.LoginUserActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -47,5 +49,4 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
 </manifest>
