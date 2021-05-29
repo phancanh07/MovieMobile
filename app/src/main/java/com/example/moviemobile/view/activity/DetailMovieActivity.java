@@ -1,21 +1,14 @@
 package com.example.moviemobile.view.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -28,14 +21,11 @@ import com.example.moviemobile.config.ApiRetrofit;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.CallBackItemCharacter;
 import com.example.moviemobile.controller.IfMovieList;
-import com.example.moviemobile.controller.Test;
 import com.example.moviemobile.model.character.Cast;
 import com.example.moviemobile.model.character.Characters;
 import com.example.moviemobile.model.detail.Detail;
 import com.example.moviemobile.model.movie.Example;
 import com.example.moviemobile.model.movie.Result;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;

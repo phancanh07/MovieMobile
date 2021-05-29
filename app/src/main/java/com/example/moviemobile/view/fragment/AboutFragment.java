@@ -1,14 +1,30 @@
 package com.example.moviemobile.view.fragment;
 
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.moviemobile.R;
+import com.example.moviemobile.config.DataLocalManager;
+import com.example.moviemobile.model.acount.Acount;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,10 +37,15 @@ public class AboutFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private TextView textView, textView2;
+    private FirebaseFirestore fstore;
+    private FirebaseAuth auth;
+    String id;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public AboutFragment() {
         // Required empty public constructor
@@ -61,6 +82,28 @@ public class AboutFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_about, container, false);
+        fstore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+        id = auth.getCurrentUser().getUid();
+        textView = view.findViewById(R.id.username_about);
+        textView2=view.findViewById(R.id.number_about);
+        Acount acount = DataLocalManager.getAcount();
+        textView.setText("Hi\t" + acount.getEmail());
+        DocumentReference reference = fstore.collection("User").document(id);
+        reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
+                if(value.exists()){
+                    textView.setText("Hi\t\t" + value.getString("username"));
+                    textView2.setText("Number:\t\t" + value.getString("number"));
+
+                }else {
+                    Log.d("tag", "onEvent: Document do not exists");
+                }
+            }
+        });
+
+        return view;
     }
 }

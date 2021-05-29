@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.fragment.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-    <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-        android:id="@+id/meowBottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:mbn_backgroundBottomColor="@color/green"
-        app:mbn_countTextColor="@color/white"
-        app:mbn_circleColor="@color/white"
-        app:mbn_countBackgroundColor="#F36E27"
-        app:mbn_defaultIconColor="@color/white"
-        app:mbn_selectedIconColor="#3C3C3C"
-        />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/username_about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableLeft="@drawable/ic_baseline_person_pin_24"
+            android:fontFamily="@font/baloo_da"
+            android:gravity="center_vertical"
+            android:text="@string/hello_blank_fragment"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/number_about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+            android:fontFamily="@font/baloo_da"
+            android:gravity="center_vertical"
+            android:text="@string/hello_blank_fragment"
+            android:textSize="20dp" />
+    </LinearLayout>
+
 
 </FrameLayout>

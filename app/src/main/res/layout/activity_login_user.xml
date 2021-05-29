@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical"
     tools:context=".view.activity.LoginUserActivity">
 
@@ -146,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
         android:outlineSpotShadowColor="#179CF4"
-        android:text="remember password"
+        android:text="Remember Password"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnLogin"

@@ -1,13 +1,9 @@
 package com.example.moviemobile.view.fragment;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,17 +17,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.moviemobile.MainActivity;
 import com.example.moviemobile.R;
-import com.example.moviemobile.adapter.DetailMovieAdapter;
 import com.example.moviemobile.adapter.MovieListAdapter;
 import com.example.moviemobile.adapter.PhotoSliderAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.IfMovieList;
-import com.example.moviemobile.controller.Test;
 import com.example.moviemobile.model.PhotoSlider;
 import com.example.moviemobile.model.movie.Result;
 import com.example.moviemobile.model.rating.TopRating;
@@ -77,16 +70,19 @@ public class HomeFragment extends Fragment implements CallBackItem {
     boolean load = true;
     private NestedScrollView nestedScrollView;
     boolean loadr = true;
-    List<Result> trendList=new ArrayList<>();
+    List<Result> trendList = new ArrayList<>();
     List<Result> ratingList = new ArrayList<>();
-    Test test;
+
     MainActivity mainActivity;
+
     // TODO: Rename and change types of parameters
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        //ca-app-pub-7345408921633152/4806326048
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
         initUI(view);
         getMovieTrending(PAGE);
         getMovieRating(PAGER);
@@ -133,7 +129,7 @@ public class HomeFragment extends Fragment implements CallBackItem {
 //        });
         return view;
     }
-
+   
 
     private void initUI(View view) {
         viewPager = view.findViewById(R.id.viewPager_Home);

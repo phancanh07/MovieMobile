@@ -4,17 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
-import com.example.moviemobile.controller.Test;
+import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.view.fragment.AboutFragment;
 import com.example.moviemobile.view.fragment.FavoriteFragment;
 import com.example.moviemobile.view.fragment.HomeFragment;
 import com.example.moviemobile.view.fragment.TVShowFragment;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
@@ -26,9 +29,6 @@ import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 import java.util.ArrayList;
 import java.util.List;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function1;
-
 
 public class MainActivity extends AppCompatActivity {
     private MeowBottomNavigation navigation;
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private SNavigationDrawer sNavigationDrawer;
     Class fragmentClass;
     public static String id = "";
-
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,11 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initUI() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+        initAdview();
         sNavigationDrawer = findViewById(R.id.navigationDrawer);
         List<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Home", R.drawable.news_bg));
@@ -142,6 +138,50 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).replace(R.id.container_Frame, fragment).commit();
         }
+    }
+
+    private void initAdview() {
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
     }
 
 }

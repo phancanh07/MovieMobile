@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/viewToat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cutom_toast_boder"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:weightSum="3">
+
+    <ImageView
+        android:id="@+id/toast_custom_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:src="@drawable/face25" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/showText"
+        android:fontFamily="@font/chewy"
+        android:gravity="center"
+        android:text="Thankyou!"
+        android:textSize="16dp" />
+
+    <ImageView
+        android:id="@+id/toast_custom_img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:src="@drawable/face25" />
+</LinearLayout>

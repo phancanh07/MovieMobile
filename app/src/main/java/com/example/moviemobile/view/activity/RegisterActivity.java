@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.moviemobile.MainActivity;
 import com.example.moviemobile.R;
+import com.example.moviemobile.config.DataLocalManager;
+import com.example.moviemobile.model.acount.Acount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
     EditText userName, password, number;
     Button button;
     FirebaseAuth auth;
@@ -37,32 +39,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initUI();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.createUserWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                    @Override
-                    public void onSuccess(AuthResult authResult) {
-                        FirebaseUser user = auth.getCurrentUser();
-                        Toast.makeText(getApplicationContext(), "CREATE ", Toast.LENGTH_SHORT).show();
-                        DocumentReference reference = firestore.collection("User").document(user.getUid());
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("username", userName.getText().toString());
-                        map.put("password", password.getText().toString());
-                        map.put("number", number.getText().toString());
-                        map.put("isUser", "1");
-                        reference.set(map);
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        Log.d("ERROR", e.getMessage());
-                    }
-                });
-            }
-        });
+        button.setOnClickListener(this::onClick);
+
     }
 
     private void initUI() {
@@ -72,5 +50,37 @@ public class RegisterActivity extends AppCompatActivity {
         number = findViewById(R.id.dk_number);
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_dkacount: {
+                createAcount();
+            }
+        }
+    }
+
+    private void createAcount() {
+        auth.createUserWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(AuthResult authResult) {
+                FirebaseUser user = auth.getCurrentUser();
+                Toast.makeText(getApplicationContext(), "CREATE ", Toast.LENGTH_SHORT).show();
+                DocumentReference reference = firestore.collection("User").document(user.getUid());
+                Map<String, Object> map = new HashMap<>();
+                map.put("username", userName.getText().toString());
+                map.put("password", password.getText().toString());
+                map.put("number", number.getText().toString());
+                reference.set(map);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Log.d("ERROR", e.getMessage());
+            }
+        });
     }
 }
