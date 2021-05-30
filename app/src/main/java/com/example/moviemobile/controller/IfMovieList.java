@@ -1,5 +1,6 @@
 package com.example.moviemobile.controller;
 
+import com.example.moviemobile.model.Video;
 import com.example.moviemobile.model.character.CharacterTV;
 import com.example.moviemobile.model.character.Characters;
 import com.example.moviemobile.model.character.DetailCharacter;
@@ -54,5 +55,7 @@ public interface IfMovieList {
     //https://api.themoviedb.org/3/tv/88396/aggregate_credits?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US
     @GET("3/tv/{id}/aggregate_credits?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US")
     Call<CharacterTV> getCharacterTv(@Path("id") String id);
+    @GET("3/movie/{id}/videos?api_key=414ffc7cfe79b04554b68edfa48428d3")
+    Call<Video> getDataVideo(@Path("id") String id);
 
 }

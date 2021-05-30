@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 
@@ -20,7 +23,9 @@ import com.example.moviemobile.adapter.MovieListAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.CallBackItemCharacter;
+import com.example.moviemobile.controller.CallBackUrl;
 import com.example.moviemobile.controller.IfMovieList;
+import com.example.moviemobile.model.Video;
 import com.example.moviemobile.model.character.Cast;
 import com.example.moviemobile.model.character.Characters;
 import com.example.moviemobile.model.detail.Detail;
@@ -34,25 +39,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailMovieActivity extends AppCompatActivity implements CallBackItem, CallBackItemCharacter {
+public class DetailMovieActivity extends AppCompatActivity implements CallBackItem, CallBackItemCharacter, View.OnClickListener {
     private Toolbar toolbar;
     private ImageView imageView;
     private RecyclerView recyclerView;
     private RecyclerView recyclerView_DV, recyclerView_related;
     private DetailMovieAdapter adapter;
     private MovieListAdapter movieListAdapter;
+    private Button btn_trailer;
     private List<Detail> detailList = new ArrayList<>();
     private List<Cast> castList = new ArrayList<>();
     private List<Result> resultList = new ArrayList<>();
     String title;
-    String id;
     MainActivity mainActivity;
-    boolean check = true;
+    IfMovieList ifMovie;
+    CallBackUrl callBackUrl;
+    String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
+        ifMovie = ApiRetrofit.getClient().create(IfMovieList.class);
+
         Intent intentReceived = getIntent();
         Bundle data = intentReceived.getExtras();
         initUI();
@@ -67,12 +76,13 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             getCharacter(title);
             movieSimilar(title);
         }
+        getVideo();
+        btn_trailer.setOnClickListener(this::onClick);
 
     }
 
 
     private void movieSimilar(String id) {
-        IfMovieList ifMovie = ApiRetrofit.getClient().create(IfMovieList.class);
         ifMovie.getMovieSimilar(id).enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
@@ -98,7 +108,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
 
 
     private void getCharacter(String id) {
-        IfMovieList ifMovie = ApiRetrofit.getClient().create(IfMovieList.class);
         ifMovie.getCharacters(id).enqueue(new Callback<Characters>() {
             @Override
             public void onResponse(Call<Characters> call, Response<Characters> response) {
@@ -122,8 +131,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
     }
 
     private void getData(String id) {
-
-        IfMovieList ifMovie = ApiRetrofit.getClient().create(IfMovieList.class);
         ifMovie.getDetailMovie(id).enqueue(new Callback<Detail>() {
             @Override
             public void onResponse(Call<Detail> call, Response<Detail> response) {
@@ -151,6 +158,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
     private void initUI() {
         toolbar = findViewById(R.id.toolbar_detail);
         imageView = findViewById(R.id.image_baner);
+        btn_trailer = findViewById(R.id.btn_trailer);
         recyclerView_DV = findViewById(R.id.recylerView_character);
         recyclerView = findViewById(R.id.item_recylerview_movie);
         recyclerView_related = findViewById(R.id.recylerView_movie_ralated);
@@ -177,5 +185,29 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         startActivity(new Intent(this, DetailCharacterActivity.class).putExtra("ID_CHARACTER", id));
     }
 
+    private void getVideo() {
+        ifMovie.getDataVideo(title).enqueue(new Callback<Video>() {
+            @Override
+            public void onResponse(Call<Video> call, Response<Video> response) {
+                if (response.isSuccessful()) {
+                    Video video = response.body();
+                    url = video.getResults().get(2).getKey();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Video> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == btn_trailer) {
+            Log.e("URL", url);
+            startActivity(new Intent(getApplicationContext(), TrailerActivity.class).putExtra("KEY_YOU", url));
+        }
+    }
 }

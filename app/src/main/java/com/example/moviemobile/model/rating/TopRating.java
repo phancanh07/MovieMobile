@@ -53,5 +53,4 @@ public class TopRating {
     public void setTotalResults(Integer totalResults) {
         this.totalResults = totalResults;
     }
-
 }

@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#515050">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:outlineSpotShadowColor="#FAF6F6"
         android:layout_height="wrap_content"
+        android:outlineSpotShadowColor="#FAF6F6"
         android:theme="@style/Theme.AppCompat.Light">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -60,11 +61,18 @@
                 android:id="@+id/item_recylerview_movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
-
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="130dp"
+                    android:text="Trailer"
+                    android:id="@+id/btn_trailer"
+                    android:background="@drawable/custom_button_video"
+                    android:layout_height="35dp" />
             </LinearLayout>
 
             <TextView
@@ -77,8 +85,8 @@
                 android:textSize="23dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
                 android:id="@+id/recylerView_character"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
             <TextView
@@ -89,9 +97,10 @@
                 android:text="RALATED MOVIES"
                 android:textColor="#F6E7E7"
                 android:textSize="23dp" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
                 android:id="@+id/recylerView_movie_ralated"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
 
