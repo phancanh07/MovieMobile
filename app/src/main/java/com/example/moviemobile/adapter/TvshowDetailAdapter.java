@@ -25,7 +25,6 @@ public class TvshowDetailAdapter extends RecyclerView.Adapter<TvshowDetailAdapte
     private List<DetailTVShow> resultList;
     private Context context;
 
-
     public TvshowDetailAdapter(List<DetailTVShow> resultList, Context context) {
         this.resultList = resultList;
         this.context = context;

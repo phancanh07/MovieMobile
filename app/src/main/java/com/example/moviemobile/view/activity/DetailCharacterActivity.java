@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.moviemobile.R;
 import com.example.moviemobile.adapter.DetailCharacterAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
+import com.example.moviemobile.config.SendID;
 import com.example.moviemobile.controller.IfMovieList;
 import com.example.moviemobile.model.character.Characters;
 import com.example.moviemobile.model.character.DetailCharacter;
@@ -38,6 +39,7 @@ public class DetailCharacterActivity extends AppCompatActivity {
         if (key != null) {
             getData(key);
         }
+        getData(SendID.id);
 
     }
 

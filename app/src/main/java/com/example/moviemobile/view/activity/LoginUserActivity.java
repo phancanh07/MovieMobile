@@ -97,7 +97,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
         auth.signInWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                ShowToast.showToast("Login Success",getApplicationContext());
+                ShowToast.showToast("Login Success", getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }

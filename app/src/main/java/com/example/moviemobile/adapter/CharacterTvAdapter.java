@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.moviemobile.R;
 
+import com.example.moviemobile.controller.CallBackItem;
+import com.example.moviemobile.controller.CallBackItemCharacter;
 import com.example.moviemobile.model.character.CharacterTV;
 import com.example.moviemobile.model.tv.Cast;
 
@@ -24,6 +26,13 @@ import java.util.List;
 public class CharacterTvAdapter extends RecyclerView.Adapter<CharacterTvAdapter.RecyclerViewHolder> {
     List<Cast> castList;
     Context context;
+    CallBackItemCharacter callBackItem;
+
+    public CharacterTvAdapter(List<Cast> castList, Context context,   CallBackItemCharacter callBackItem) {
+        this.castList = castList;
+        this.context = context;
+        this.callBackItem = callBackItem;
+    }
 
     public CharacterTvAdapter(List<Cast> castList, Context context) {
         this.castList = castList;
@@ -52,7 +61,7 @@ public class CharacterTvAdapter extends RecyclerView.Adapter<CharacterTvAdapter.
 
     @Override
     public int getItemCount() {
-        if (castList!=null){
+        if (castList != null) {
             return castList.size();
         }
         return 0;
@@ -70,7 +79,7 @@ public class CharacterTvAdapter extends RecyclerView.Adapter<CharacterTvAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    callBackItem.onClickItemCharacter(getAbsoluteAdapterPosition(),String.valueOf(castList.get(getAbsoluteAdapterPosition()).getId()));
                 }
             });
         }

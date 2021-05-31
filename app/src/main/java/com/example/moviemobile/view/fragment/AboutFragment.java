@@ -87,23 +87,21 @@ public class AboutFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         id = auth.getCurrentUser().getUid();
         textView = view.findViewById(R.id.username_about);
-        textView2=view.findViewById(R.id.number_about);
+        textView2 = view.findViewById(R.id.number_about);
         Acount acount = DataLocalManager.getAcount();
         textView.setText("Hi\t" + acount.getEmail());
         DocumentReference reference = fstore.collection("User").document(id);
         reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                if(value.exists()){
+                if (value.exists()) {
                     textView.setText("Hi\t\t" + value.getString("username"));
                     textView2.setText("Number:\t\t" + value.getString("number"));
-
-                }else {
+                } else {
                     Log.d("tag", "onEvent: Document do not exists");
                 }
             }
         });
-
         return view;
     }
 }
