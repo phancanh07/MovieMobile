@@ -1,5 +1,6 @@
 package com.example.moviemobile.controller;
 
+import com.example.moviemobile.model.Review.Review;
 import com.example.moviemobile.model.Video;
 import com.example.moviemobile.model.character.CharacterTV;
 import com.example.moviemobile.model.character.Characters;
@@ -10,6 +11,7 @@ import com.example.moviemobile.model.rating.TopRating;
 import com.example.moviemobile.model.trend.Dates;
 import com.example.moviemobile.model.trend.MovieTrend;
 import com.example.moviemobile.model.tvshow.DetailTVShow;
+import com.example.moviemobile.model.tvshow.SimilarResult;
 import com.example.moviemobile.model.tvshow.TvTop;
 
 import retrofit2.Call;
@@ -57,5 +59,11 @@ public interface IfMovieList {
     Call<CharacterTV> getCharacterTv(@Path("id") String id);
     @GET("3/movie/{id}/videos?api_key=414ffc7cfe79b04554b68edfa48428d3")
     Call<Video> getDataVideo(@Path("id") String id);
+
+    //https://api.themoviedb.org/3/movie/460465/reviews?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1
+    @GET("3/movie/{id}/reviews?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1")
+    Call<Review> getDataReview(@Path("id") int id);
+    @GET("https://api.themoviedb.org/3/tv/{tv_id}/similar?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1")
+    Call<SimilarResult> getMovieSimilarTV(@Path("tv_id") String id);
 
 }

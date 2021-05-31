@@ -102,7 +102,7 @@ public class TVShowFragment extends Fragment implements CallBackItem {
             public void onResponse(Call<TvTop> call, Response<TvTop> response) {
                 if (response.isSuccessful()) {
                     TvTop tvTop = response.body();
-                    movieListAdapter = new TVshowTopAdapter(tvTop.getResults(), getContext(),TVShowFragment.this::onClickItem);
+                    movieListAdapter = new TVshowTopAdapter(tvTop.getResults(), getContext(), TVShowFragment.this::onClickItem);
                     recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
                     recyclerView.setHasFixedSize(false);
                     recyclerView.setAdapter(movieListAdapter);
@@ -123,7 +123,7 @@ public class TVShowFragment extends Fragment implements CallBackItem {
             public void onResponse(Call<TvTop> call, Response<TvTop> response) {
                 if (response.isSuccessful()) {
                     TvTop tvTop = response.body();
-                    movieListAdapter = new TVshowTopAdapter(tvTop.getResults(), getContext(),TVShowFragment.this::onClickItem);
+                    movieListAdapter = new TVshowTopAdapter(tvTop.getResults(), getContext(), TVShowFragment.this::onClickItem);
                     recyclerViewtv_trend.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
                     recyclerViewtv_trend.setHasFixedSize(false);
                     recyclerViewtv_trend.setAdapter(movieListAdapter);
@@ -177,7 +177,7 @@ public class TVShowFragment extends Fragment implements CallBackItem {
 
     @Override
     public void onClickItem(int positon, String id) {
-        Toast.makeText(getContext(),"đã đc",Toast.LENGTH_SHORT).show();
-    startActivity(new Intent(getContext(), TvShowDetailActivity.class));
+        Toast.makeText(getContext(), "đã đc", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getContext(), TvShowDetailActivity.class).putExtra("TV_SHOW",id));
     }
 }

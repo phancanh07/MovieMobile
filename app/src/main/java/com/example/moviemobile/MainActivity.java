@@ -12,6 +12,7 @@ import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.view.fragment.AboutFragment;
 import com.example.moviemobile.view.fragment.FavoriteFragment;
 import com.example.moviemobile.view.fragment.HomeFragment;
+import com.example.moviemobile.view.fragment.SearchFragment;
 import com.example.moviemobile.view.fragment.TVShowFragment;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -55,12 +56,16 @@ public class MainActivity extends AppCompatActivity {
                         fragmentClass = FavoriteFragment.class;
                         break;
                     }
-                    case 3: {
+                    case 4: {
                         fragmentClass = AboutFragment.class;
                         break;
                     }
                     case 2: {
                         fragmentClass = TVShowFragment.class;
+                        break;
+                    }
+                    case 3: {
+                        fragmentClass = SearchFragment.class;
                         break;
                     }
 
@@ -113,20 +118,11 @@ public class MainActivity extends AppCompatActivity {
         menuItems.add(new MenuItem("Home", R.drawable.news_bg));
         menuItems.add(new MenuItem("Favorite", R.drawable.feed_bg));
         menuItems.add(new MenuItem("TVshow", R.drawable.message_bg));
+        menuItems.add(new MenuItem("Search", R.drawable.message_bg));
         menuItems.add(new MenuItem("About", R.drawable.message_bg));
+
         sNavigationDrawer.setMenuItemList(menuItems);
         sNavigationDrawer.setAppbarTitleTV("Movie");
-        // FirebaseAuth.getInstance().signOut();
-
-        //
-
-        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
-        if (signInAccount != null) {
-            String personName = signInAccount.getDisplayName();
-            String personEmail = signInAccount.getEmail();
-            Log.d("personEmail", String.valueOf(signInAccount.getPhotoUrl()));
-        }
-        //
 
         fragmentClass = HomeFragment.class;
         try {
@@ -146,41 +142,12 @@ public class MainActivity extends AppCompatActivity {
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         AdView adView = new AdView(this);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
     }
 
 }
