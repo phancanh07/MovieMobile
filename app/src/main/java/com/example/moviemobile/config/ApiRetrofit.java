@@ -22,7 +22,4 @@ public class ApiRetrofit {
         return retrofit;
     }
 
-    public static void init(Context context) {
-        showToast = new ShowToast(context);
-    }
 }

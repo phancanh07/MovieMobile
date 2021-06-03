@@ -40,13 +40,12 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
     private Button btnLogin;
     private CheckBox rememberpassword;
     private TextView creatacout, forgotPassword;
-    private ShowToast showToast;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
-        showToast = new ShowToast(getApplicationContext());
         initUI();
         btnLogin.setOnClickListener(this::onClick);
         creatacout.setOnClickListener(this::onClick);
@@ -111,12 +110,16 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
 
     private void validateText() {
         boolean bchk = rememberpassword.isChecked();
-        if (userName.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            return;
-        } else {
-            Acount acount = new Acount(userName.getText().toString(), password.getText().toString());
-            DataLocalManager.setUser(acount);
-            DataLocalManager.setChecked(bchk);
+        try {
+            if (userName.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                return;
+            } else {
+                Acount acount = new Acount(userName.getText().toString(), password.getText().toString());
+                DataLocalManager.setUser(acount);
+                DataLocalManager.setChecked(bchk);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

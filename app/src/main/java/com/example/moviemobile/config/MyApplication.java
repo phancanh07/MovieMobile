@@ -7,6 +7,6 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         DataLocalManager.init(getApplicationContext());
-        ApiRetrofit.init(getApplicationContext());
+
     }
 }

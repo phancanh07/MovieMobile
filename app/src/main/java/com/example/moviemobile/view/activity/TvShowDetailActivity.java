@@ -62,7 +62,6 @@ public class TvShowDetailActivity extends AppCompatActivity implements CallBackI
         Bundle data = intentReceived.getExtras();
         if (data != null) {
             getData(data.getString("TV_SHOW"));
-
             getDataChacter(data.getString("TV_SHOW"));
             movieSimilar(data.getString("TV_SHOW"));
         }

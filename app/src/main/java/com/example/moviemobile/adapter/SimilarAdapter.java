@@ -34,7 +34,7 @@ public class SimilarAdapter extends RecyclerView.Adapter<SimilarAdapter.Recycler
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.movie_list_adapter, parent, false);
-        return new SimilarAdapter.RecyclerViewHolder(view);
+        return new RecyclerViewHolder(view);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SimilarAdapter extends RecyclerView.Adapter<SimilarAdapter.Recycler
         Similar similar = list.get(position);
         holder.textView.setText("" + similar.getName());
         holder.count_rating.setText(similar.getVoteAverage() + "");
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500" + similar.getPosterPath()).into(holder.imageView);
+        Glide.with(context).load("https://image.tmdb.org/t/p/w500" + similar.getPosterPath()).override(1080,600).into(holder.imageView);
         Typeface typeface = Typeface.createFromAsset(context.getAssets(), "tama2.ttf");
         holder.textView.setTypeface(typeface);
         holder.count_rating.setTypeface(typeface);

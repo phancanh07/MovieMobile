@@ -49,6 +49,18 @@ public class KnownFor {
     @SerializedName("vote_count")
     @Expose
     private Integer voteCount;
+    @SerializedName("first_air_date")
+    @Expose
+    private String firstAirDate;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("origin_country")
+    @Expose
+    private List<String> originCountry = null;
+    @SerializedName("original_name")
+    @Expose
+    private String originalName;
 
     public Boolean getAdult() {
         return adult;
@@ -162,4 +174,37 @@ public class KnownFor {
         this.voteCount = voteCount;
     }
 
+    public String getFirstAirDate() {
+        return firstAirDate;
+    }
+
+    public void setFirstAirDate(String firstAirDate) {
+        this.firstAirDate = firstAirDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<String> getOriginCountry() {
+        return originCountry;
+    }
+
+    public void setOriginCountry(List<String> originCountry) {
+        this.originCountry = originCountry;
+    }
+
+    public String getOriginalName() {
+        return originalName;
+    }
+
+    public void setOriginalName(String originalName) {
+        this.originalName = originalName;
+    }
+
 }
+

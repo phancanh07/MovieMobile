@@ -32,7 +32,7 @@ public class ResultSearch {
     private Double popularity;
     @SerializedName("profile_path")
     @Expose
-    private String profilePath;
+    private Object profilePath;
 
     public Boolean getAdult() {
         return adult;
@@ -98,13 +98,12 @@ public class ResultSearch {
         this.popularity = popularity;
     }
 
-    public String getProfilePath() {
+    public Object getProfilePath() {
         return profilePath;
     }
 
-    public void setProfilePath(String profilePath) {
+    public void setProfilePath(Object profilePath) {
         this.profilePath = profilePath;
     }
 
 }
-

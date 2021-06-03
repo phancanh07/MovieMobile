@@ -101,6 +101,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
 
                 }
             }
+
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
 
@@ -194,7 +195,9 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             public void onResponse(Call<Video> call, Response<Video> response) {
                 if (response.isSuccessful()) {
                     Video video = response.body();
-                    url = video.getResults().get(0).getKey();
+                    if (video.getResults().size() != 0) {
+                        url = video.getResults().get(0).getKey();
+                    }
                 }
             }
 
