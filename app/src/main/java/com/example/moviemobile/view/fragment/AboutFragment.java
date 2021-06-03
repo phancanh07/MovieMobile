@@ -3,7 +3,6 @@ package com.example.moviemobile.view.fragment;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -18,19 +17,14 @@ import com.example.moviemobile.config.DataLocalManager;
 import com.example.moviemobile.model.acount.Acount;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,7 +37,6 @@ public class AboutFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final String TAG = "TAG";
     private TextView textView, textView2;
     private FirebaseFirestore fstore;
     private FirebaseAuth auth;
@@ -94,33 +87,23 @@ public class AboutFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         id = auth.getCurrentUser().getUid();
         textView = view.findViewById(R.id.username_about);
-        textView2 = view.findViewById(R.id.number_about);
+        textView2=view.findViewById(R.id.number_about);
+        Acount acount = DataLocalManager.getAcount();
+        textView.setText("Hi\t" + acount.getEmail());
         DocumentReference reference = fstore.collection("User").document(id);
-//        fstore.collection("User").get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d(TAG, document.getId() + " => " + document.getData().toString());
-//                            }
-//                        } else {
-//                            Log.w(TAG, "Error getting documents.", task.getException());
-//                        }
-//                    }
-//                });
         reference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable @org.jetbrains.annotations.Nullable DocumentSnapshot value, @Nullable @org.jetbrains.annotations.Nullable FirebaseFirestoreException error) {
-                if (value.exists()) {
-                    Log.d("TAG", value.toString());
+                if(value.exists()){
                     textView.setText("Hi\t\t" + value.getString("username"));
                     textView2.setText("Number:\t\t" + value.getString("number"));
-                } else {
+
+                }else {
                     Log.d("tag", "onEvent: Document do not exists");
                 }
             }
         });
+
         return view;
     }
 }
