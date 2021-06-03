@@ -78,7 +78,6 @@ public class TvShowDetailActivity extends AppCompatActivity implements CallBackI
                     tvDetails.add(detailTVShow);
                     Glide.with(getApplicationContext()).load("https://image.tmdb.org/t/p/w500" + tvDetails.get(0).getBackdropPath()).into(imageView);
                     adapter = new TvshowDetailAdapter(tvDetails, getApplicationContext());
-
                     LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false);
                     recyclerView.setLayoutManager(manager);
                     recyclerView.setHasFixedSize(false);

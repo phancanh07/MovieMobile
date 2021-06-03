@@ -191,7 +191,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             public void onResponse(Call<Video> call, Response<Video> response) {
                 if (response.isSuccessful()) {
                     Video video = response.body();
-                    url = video.getResults().get(2).getKey();
+                    url = video.getResults().get(0).getKey();
                 }
             }
 
