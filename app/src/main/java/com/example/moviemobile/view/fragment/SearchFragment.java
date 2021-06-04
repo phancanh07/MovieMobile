@@ -1,5 +1,6 @@
 package com.example.moviemobile.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,8 +28,10 @@ import com.example.moviemobile.adapter.MovieListAdapter;
 import com.example.moviemobile.adapter.SearchDataAdapter;
 import com.example.moviemobile.adapter.TVshowTopAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
+import com.example.moviemobile.config.SendID;
 import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.controller.CallBackItem;
+import com.example.moviemobile.controller.CallBackItemCharacter;
 import com.example.moviemobile.controller.IfMovieList;
 import com.example.moviemobile.model.movie.Example;
 import com.example.moviemobile.model.movie.Result;
@@ -36,6 +39,7 @@ import com.example.moviemobile.model.search.KnownFor;
 import com.example.moviemobile.model.search.ResultSearch;
 import com.example.moviemobile.model.search.SearchData;
 import com.example.moviemobile.model.tvshow.TvTop;
+import com.example.moviemobile.view.activity.DetailCharacterActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -46,7 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SearchFragment extends Fragment implements View.OnClickListener, CallBackItem {
+public class SearchFragment extends Fragment implements View.OnClickListener, CallBackItemCharacter, CallBackItem {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,6 +70,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
     private MovieListAdapter movieListAdapter;
     private IfMovieList ifMovieList;
     private SearchDataAdapter searchDataAdapter;
+    CallBackItemCharacter itemCharacter;
 
     public SearchFragment() {
 
@@ -97,6 +102,8 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
         ifMovieList = ApiRetrofit.getClient().create(IfMovieList.class);
         initUI(view);
         btn_search.setOnClickListener(this::onClick);
+
+
         return view;
     }
 
@@ -146,7 +153,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
                     peoPleList.clear();
                     peoPleList.addAll(response.body().getResults());
                     StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
-                    searchDataAdapter = new SearchDataAdapter(getContext(), peoPleList, SearchFragment.this::onClickItem);
+                    searchDataAdapter = new SearchDataAdapter(getContext(), peoPleList, SearchFragment.this::onClickItemCharacter);
                     recylerView_movie_search.setLayoutManager(manager);
                     recylerView_movie_search.setAdapter(searchDataAdapter);
                 }
@@ -163,7 +170,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
         ifMovieList.getSearchTV(id).enqueue(new Callback<TvTop>() {
             @Override
             public void onResponse(Call<TvTop> call, Response<TvTop> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ShowToast.showToast("Successful Search", getContext());
                     listtv.clear();
                     listtv.addAll(response.body().getResults());
@@ -195,6 +202,15 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
 
         }
         ShowToast.showToast("Not Found", getContext());
+    }
+
+
+    @Override
+    public void onClickItemCharacter(int positon, String id) {
+
+        SendID.setId(id);
+        startActivity(new Intent(getContext(), DetailCharacterActivity.class));
+
     }
 
     @Override

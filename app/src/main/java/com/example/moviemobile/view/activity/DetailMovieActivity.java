@@ -46,22 +46,24 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
     private RecyclerView recyclerView_DV, recyclerView_related;
     private DetailMovieAdapter adapter;
     private MovieListAdapter movieListAdapter;
-    private Button btn_trailer;
+    private Button btn_trailer, btn_review;
     private List<Detail> detailList = new ArrayList<>();
     private List<Cast> castList = new ArrayList<>();
     private List<Result> resultList = new ArrayList<>();
     String title;
     MainActivity mainActivity;
     IfMovieList ifMovie;
-    CallBackUrl callBackUrl;
     String url = "";
+    String urlPath = "";
+    String urlBaner = "";
+    String movieName = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
         ifMovie = ApiRetrofit.getClient().create(IfMovieList.class);
-
         Intent intentReceived = getIntent();
         Bundle data = intentReceived.getExtras();
         initUI();
@@ -78,6 +80,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         }
         getVideo();
         btn_trailer.setOnClickListener(this::onClick);
+        btn_review.setOnClickListener(this::onClick);
 
     }
 
@@ -94,8 +97,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
                     recyclerView_related.setHasFixedSize(false);
                     recyclerView_related.setLayoutManager(manager);
                     recyclerView_related.setAdapter(movieListAdapter);
-
-
                 }
             }
 
@@ -118,8 +119,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
                     recyclerView_DV.setLayoutManager(layoutManager);
                     recyclerView_DV.setHasFixedSize(true);
                     recyclerView_DV.setAdapter(characterAdapter);
-
-
                 }
             }
 
@@ -143,6 +142,9 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setHasFixedSize(false);
                     recyclerView.setAdapter(adapter);
+                    urlPath = detail.getPosterPath();
+                    urlBaner = detail.getBackdropPath();
+                    movieName = detail.getOriginalTitle();
 
                 }
             }
@@ -159,6 +161,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         toolbar = findViewById(R.id.toolbar_detail);
         imageView = findViewById(R.id.image_baner);
         btn_trailer = findViewById(R.id.btn_trailer);
+        btn_review = findViewById(R.id.btn_review);
         recyclerView_DV = findViewById(R.id.recylerView_character);
         recyclerView = findViewById(R.id.item_recylerview_movie);
         recyclerView_related = findViewById(R.id.recylerView_movie_ralated);
@@ -191,7 +194,13 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             public void onResponse(Call<Video> call, Response<Video> response) {
                 if (response.isSuccessful()) {
                     Video video = response.body();
+
+                    if (video.getResults().size() != 0) {
+                        url = video.getResults().get(0).getKey();
+                    }
+
                     url = video.getResults().get(0).getKey();
+
                 }
             }
 
@@ -208,6 +217,15 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         if (v == btn_trailer) {
             Log.e("URL", url);
             startActivity(new Intent(getApplicationContext(), TrailerActivity.class).putExtra("KEY_YOU", url));
+        } else if (v == btn_review) {
+            Bundle bundle = new Bundle();
+            bundle.putString("1", urlBaner);
+            bundle.putString("2", urlPath);
+            bundle.putString("3", movieName);
+            bundle.putString("4", title);
+            Intent intent = new Intent(this, ReviewActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 }

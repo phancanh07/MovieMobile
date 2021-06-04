@@ -1,6 +1,13 @@
 package com.example.moviemobile.config;
 
 public class SendID {
-    public static String id="";
+    private static String id="";
 
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        SendID.id = id;
+    }
 }

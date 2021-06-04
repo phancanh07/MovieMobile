@@ -39,7 +39,7 @@ public class DetailCharacterActivity extends AppCompatActivity {
         if (key != null) {
             getData(key);
         }
-        getData(SendID.id);
+
 
     }
 

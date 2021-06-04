@@ -115,12 +115,13 @@ public class TvShowDetailActivity extends AppCompatActivity implements CallBackI
             @Override
             public void onResponse(Call<SimilarResult> call, Response<SimilarResult> response) {
                 similarList.addAll(response.body().getResults());
-                similaradapter = new SimilarAdapter(getApplicationContext(),similarList,TvShowDetailActivity.this::onClickItem);
+                similaradapter = new SimilarAdapter(getApplicationContext(), similarList, TvShowDetailActivity.this::onClickItem);
                 LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL, false);
                 recyclerView_lq.setHasFixedSize(false);
                 recyclerView_lq.setLayoutManager(manager);
                 recyclerView_lq.setAdapter(similaradapter);
             }
+
             @Override
             public void onFailure(Call<SimilarResult> call, Throwable t) {
 
@@ -151,7 +152,7 @@ public class TvShowDetailActivity extends AppCompatActivity implements CallBackI
 
     @Override
     public void onClickItemCharacter(int positon, String id) {
-        SendID.id = id;
+        SendID.setId(id);
         startActivity(new Intent(this, DetailCharacterActivity.class));
     }
 }

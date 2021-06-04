@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.moviemobile.R;
+import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.controller.CallBackItem;
+import com.example.moviemobile.controller.CallBackItemCharacter;
 import com.example.moviemobile.model.search.ResultSearch;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,19 +24,18 @@ import java.util.List;
 public class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.RecyclerViewHolder> {
     private Context context;
     private List<ResultSearch> list;
-    private CallBackItem callBackItem;
+    private CallBackItemCharacter itemCharacter;
 
-    public SearchDataAdapter(Context context, List<ResultSearch> list, CallBackItem callBackItem) {
+    public SearchDataAdapter(Context context, List<ResultSearch> list, CallBackItemCharacter itemCharacter) {
         this.context = context;
         this.list = list;
-        this.callBackItem = callBackItem;
+        this.itemCharacter = itemCharacter;
     }
-
 
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.detail_item_character, parent, false);
-        return new SearchDataAdapter.RecyclerViewHolder(view);
+        return new RecyclerViewHolder(view);
     }
 
     @Override
@@ -44,7 +45,6 @@ public class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.Re
         if (list.get(position).getProfilePath() != null) {
             Glide.with(context).load("https://image.tmdb.org/t/p/w500" + list.get(position).getProfilePath()).into(holder.imageView);
         }
-
     }
 
     @Override
@@ -67,9 +67,10 @@ public class SearchDataAdapter extends RecyclerView.Adapter<SearchDataAdapter.Re
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callBackItem.onClickItem(getAbsoluteAdapterPosition(), String.valueOf(list.get(getAbsoluteAdapterPosition()).getId()));
+                    itemCharacter.onClickItemCharacter(getAbsoluteAdapterPosition(), String.valueOf(list.get(getAbsoluteAdapterPosition()).getId()));
                 }
             });
+
         }
     }
 }

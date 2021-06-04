@@ -32,6 +32,16 @@
             android:gravity="center_vertical"
             android:text="@string/hello_blank_fragment"
             android:textSize="20dp" />
+        <TextView
+            android:id="@+id/log_about"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_baseline_login_24"
+            android:fontFamily="@font/baloo_da"
+            android:gravity="center_vertical"
+            android:text="Log out"
+            android:textSize="20dp" />
     </LinearLayout>
 
 

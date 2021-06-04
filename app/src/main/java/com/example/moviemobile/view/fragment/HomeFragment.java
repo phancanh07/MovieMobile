@@ -107,26 +107,6 @@ public class HomeFragment extends Fragment implements CallBackItem {
         });
 
 
-//        recyclerViewRating.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                firsVisitableItemCountt = layoutManagerr.findFirstCompletelyVisibleItemPosition();
-//                totalitemCountt = layoutManagerr.getItemCount();
-//                visitableCountt = layoutManagerr.getChildCount();
-//                if (loadr) {
-//                    if (totalitemCountt > previousTotalt) {
-//                        previousTotalt = totalitemCountt;
-//                        PAGER++;
-//                        loadr = false;
-//                    }
-//                } else if (!loadr && (firsVisitableItemCountt + visitableCountt) >= totalitemCountt) {
-//                    getMovieRating(PAGER);
-//                    progressBar.setVisibility(View.VISIBLE);
-//                    loadr = true;
-//                }
-//            }
-//        });
         return view;
     }
    
