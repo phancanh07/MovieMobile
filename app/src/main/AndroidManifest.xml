@@ -19,7 +19,14 @@
         <activity android:name=".view.activity.MoreMovieActivity" />
         <activity android:name=".view.activity.ReviewActivity" />
         <activity android:name=".view.activity.TrailerActivity" />
-        <activity android:name=".view.activity.SplasSceenActivity" />
+        <activity android:name=".view.activity.SplasSceenActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".view.activity.ForgotPassActivity" />
 
         <meta-data
@@ -30,11 +37,7 @@
         <activity
             android:name=".view.activity.LoginUserActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.TvShowDetailActivity"

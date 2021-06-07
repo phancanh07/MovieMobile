@@ -41,12 +41,6 @@ public class TopMovieRatingAdapter extends RecyclerView.Adapter<TopMovieRatingAd
         holder.textView.setText(result.getTitle());
         holder.count_rating.setText(result.getVoteAverage() + "");
         Glide.with(context).load("https://image.tmdb.org/t/p/w500" + result.getPosterPath()).into(holder.imageView);
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("NAME:", result.getOriginalTitle());
-            }
-        });
 
     }
 

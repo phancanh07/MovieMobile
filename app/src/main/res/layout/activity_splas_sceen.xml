@@ -5,16 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/frame"
     android:orientation="vertical"
     tools:context=".view.activity.SplasSceenActivity">
 
+    <TextView
+        android:id="@+id/txt_time"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+
+        android:layout_above="@+id/simple_arc"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="27dp"
+        android:layout_marginBottom="484dp"
+        android:background="@drawable/custom_button_search1"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#0303F8"
+        android:textSize="30dp" />
+
     <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/simple_arc"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
         android:visibility="visible"
         custom:arc_margin="3dp"
-        android:layout_gravity="center_horizontal"
         custom:arc_speed="fast"
         custom:arc_style="complete_arc">
 
