@@ -63,9 +63,17 @@ public interface IfMovieList {
     @GET("3/movie/{id}/videos?api_key=414ffc7cfe79b04554b68edfa48428d3")
     Call<Video> getDataVideo(@Path("id") String id);
 
+
+    //https://api.themoviedb.org/3/tv/45950/videos?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US
+    @GET("3/tv/{id}/videos?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US")
+    Call<Video> getDataVideoTV(@Path("id") String id);
+
     //https://api.themoviedb.org/3/movie/460465/reviews?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1
     @GET("3/movie/{id}/reviews?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1")
     Call<Review> getDataReview(@Path("id") int id);
+
+    @GET("3/tv/{id}/reviews?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1")
+    Call<Review> getDataReviewTV(@Path("id") int id);
 
     @GET("3/tv/{tv_id}/similar?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1")
     Call<SimilarResult> getMovieSimilarTV(@Path("tv_id") String id);
@@ -73,11 +81,16 @@ public interface IfMovieList {
     @GET("3/search/movie?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1&include_adult=false")
     Call<Example> getSearchMovie(@Query("query") String query);
 
-    //https://api.themoviedb.org/3/search/person?api_key=414ffc7cfe79b04554b68edfa48428d3&language=en-US&query=Chris%20Evans&page=1&include_adult=false
     @GET("3/search/person?api_key=414ffc7cfe79b04554b68edfa48428d3&language=en-US&page=1&include_adult=false")
     Call<SearchData> getSearchPeople(@Query("query") String query);
 
     @GET("3/search/tv?api_key=7ca9a1c101d5fe4355292c4d92a72f75&language=en-US&page=1&include_adult=false")
     Call<TvTop> getSearchTV(@Query("query") String id);
+
+    @GET("3/movie/popular?api_key=414ffc7cfe79b04554b68edfa48428d3&language=en-US")
+    Call<Example> getListMovie(@Query("page") int page);
+
+    @GET("3/tv/popular?api_key=414ffc7cfe79b04554b68edfa48428d3&language=en-US")
+    Call<TvTop> getListTV(@Query("page") int page);
 
 }

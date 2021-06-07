@@ -28,7 +28,7 @@ public class CharacterTvAdapter extends RecyclerView.Adapter<CharacterTvAdapter.
     Context context;
     CallBackItemCharacter callBackItem;
 
-    public CharacterTvAdapter(List<Cast> castList, Context context,   CallBackItemCharacter callBackItem) {
+    public CharacterTvAdapter(List<Cast> castList, Context context, CallBackItemCharacter callBackItem) {
         this.castList = castList;
         this.context = context;
         this.callBackItem = callBackItem;
@@ -79,7 +79,7 @@ public class CharacterTvAdapter extends RecyclerView.Adapter<CharacterTvAdapter.
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    callBackItem.onClickItemCharacter(getAbsoluteAdapterPosition(),String.valueOf(castList.get(getAbsoluteAdapterPosition()).getId()));
+                    callBackItem.onClickItemCharacter(getAbsoluteAdapterPosition(), String.valueOf(castList.get(getAbsoluteAdapterPosition()).getId()));
                 }
             });
         }

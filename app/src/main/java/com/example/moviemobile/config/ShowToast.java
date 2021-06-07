@@ -25,7 +25,7 @@ public class ShowToast {
         textView2 = view.findViewById(R.id.showText);
         textView2.setText(text);
         toast.setView(view);
-        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setDuration(Toast.LENGTH_SHORT);
         toast.show();
     }
 }

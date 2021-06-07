@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/linear"
     tools:context=".view.fragment.AboutFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -32,6 +33,7 @@
             android:gravity="center_vertical"
             android:text="@string/hello_blank_fragment"
             android:textSize="20dp" />
+
         <TextView
             android:id="@+id/log_about"
             android:layout_width="match_parent"
@@ -42,6 +44,17 @@
             android:gravity="center_vertical"
             android:text="Log out"
             android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:fontFamily="@font/baloo_da"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:drawableLeft="@drawable/ic_baseline_account_balance_24"
+            android:gravity="center_vertical"
+            android:textSize="20dp"
+            android:text="products belong to group 6"
+            />
     </LinearLayout>
 
 

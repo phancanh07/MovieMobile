@@ -41,10 +41,16 @@ public class ReviewActivity extends AppCompatActivity {
         String poster = data.getString("2");
         String title = data.getString("3");
         String id = data.getString("4");
+        String id1 = data.getString("5");
         txt_name.setText(title);
         Glide.with(this).load("https://image.tmdb.org/t/p/w500" + baner).into(banner);
         Glide.with(this).load("https://image.tmdb.org/t/p/w500" + poster).into(posster);
         getReview(id);
+        if (id1 != "1") {
+            getReview(id);
+        } else {
+            getReviewTV(id);
+        }
     }
 
     private void getReview(String id) {
@@ -52,11 +58,32 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Review> call, Response<Review> response) {
                 if (response.isSuccessful()) {
-                    int size=response.body().getResults().size();
-                    if(size!=0){
+                    int size = response.body().getResults().size();
+                    if (size != 0) {
                         txt_review.setText(response.body().getResults().get(0).getContent());
+                    } else {
+                        txt_review.setText("Chưa cập nhật review");
                     }
-                    else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Review> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void getReviewTV(String id) {
+        ifMovie.getDataReviewTV(Integer.parseInt(id)).enqueue(new Callback<Review>() {
+            @Override
+            public void onResponse(Call<Review> call, Response<Review> response) {
+                if (response.isSuccessful()) {
+                    int size = response.body().getResults().size();
+                    if (size != 0) {
+                        txt_review.setText(response.body().getResults().get(0).getContent());
+                    } else {
                         txt_review.setText("Chưa cập nhật review");
                     }
 

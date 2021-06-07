@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.moviemobile.MainActivity;
 import com.example.moviemobile.R;
@@ -30,6 +31,7 @@ import com.example.moviemobile.model.movie.Result;
 import com.example.moviemobile.model.rating.TopRating;
 import com.example.moviemobile.model.trend.MovieTrend;
 import com.example.moviemobile.view.activity.DetailMovieActivity;
+import com.example.moviemobile.view.activity.MoreMovieActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class HomeFragment extends Fragment implements CallBackItem {
+public class HomeFragment extends Fragment implements CallBackItem, View.OnClickListener {
 
 
     private ProgressBar progressBar;
@@ -56,22 +58,17 @@ public class HomeFragment extends Fragment implements CallBackItem {
     private MovieListAdapter movieListAdapter;
     private RecyclerView recyclerView, recyclerViewRating;
     int firsVisitableItemCount;
-    int firsVisitableItemCountt;
     private LinearLayoutManager layoutManager;
     private LinearLayoutManager layoutManagerr;
     int totalitemCount;
     int visitableCount;
     int previousTotal;
-    int totalitemCountt;
-    int visitableCountt;
-    int previousTotalt;
     public static int PAGE = 1;
     public static int PAGER = 1;
     boolean load = true;
-    private NestedScrollView nestedScrollView;
-    boolean loadr = true;
     List<Result> trendList = new ArrayList<>();
     List<Result> ratingList = new ArrayList<>();
+    private TextView seemore1, seemore2;
 
     MainActivity mainActivity;
 
@@ -105,17 +102,21 @@ public class HomeFragment extends Fragment implements CallBackItem {
                 }
             }
         });
+        seemore1.setOnClickListener(this::onClick);
+        seemore2.setOnClickListener(this::onClick);
 
 
         return view;
     }
-   
+
 
     private void initUI(View view) {
         viewPager = view.findViewById(R.id.viewPager_Home);
         circleIndicator = view.findViewById(R.id.circleIndicatior_home);
         recyclerView = view.findViewById(R.id.recyclerView_trend_movie);
         recyclerViewRating = view.findViewById(R.id.recyclerView_rating_movie);
+        seemore1 = view.findViewById(R.id.seemoremovie);
+        seemore2 = view.findViewById(R.id.seemoremovie2);
         progressBar = view.findViewById(R.id.progressBarr);
         list = getList();
         photoSliderAdapter = new PhotoSliderAdapter(getContext(), getList());
@@ -229,5 +230,10 @@ public class HomeFragment extends Fragment implements CallBackItem {
 //        bundle.putString("KEY_ID", id);
 //        intent.putExtras(bundle);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(getContext(), MoreMovieActivity.class));
     }
 }

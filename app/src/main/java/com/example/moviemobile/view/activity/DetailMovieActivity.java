@@ -194,12 +194,11 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             public void onResponse(Call<Video> call, Response<Video> response) {
                 if (response.isSuccessful()) {
                     Video video = response.body();
-
                     if (video.getResults().size() != 0) {
                         url = video.getResults().get(0).getKey();
                     }
 
-                    url = video.getResults().get(0).getKey();
+
 
                 }
             }
@@ -215,7 +214,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
     @Override
     public void onClick(View v) {
         if (v == btn_trailer) {
-            Log.e("URL", url);
             startActivity(new Intent(getApplicationContext(), TrailerActivity.class).putExtra("KEY_YOU", url));
         } else if (v == btn_review) {
             Bundle bundle = new Bundle();
@@ -223,6 +221,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             bundle.putString("2", urlPath);
             bundle.putString("3", movieName);
             bundle.putString("4", title);
+            bundle.putString("5", "0");
             Intent intent = new Intent(this, ReviewActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);

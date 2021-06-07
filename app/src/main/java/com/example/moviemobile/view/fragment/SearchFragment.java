@@ -32,6 +32,7 @@ import com.example.moviemobile.config.SendID;
 import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.CallBackItemCharacter;
+import com.example.moviemobile.controller.CallbackTV;
 import com.example.moviemobile.controller.IfMovieList;
 import com.example.moviemobile.model.movie.Example;
 import com.example.moviemobile.model.movie.Result;
@@ -40,6 +41,8 @@ import com.example.moviemobile.model.search.ResultSearch;
 import com.example.moviemobile.model.search.SearchData;
 import com.example.moviemobile.model.tvshow.TvTop;
 import com.example.moviemobile.view.activity.DetailCharacterActivity;
+import com.example.moviemobile.view.activity.DetailMovieActivity;
+import com.example.moviemobile.view.activity.TvShowDetailActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
@@ -50,7 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SearchFragment extends Fragment implements View.OnClickListener, CallBackItemCharacter, CallBackItem {
+public class SearchFragment extends Fragment implements View.OnClickListener, CallBackItemCharacter, CallBackItem, CallbackTV {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -152,7 +155,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
                     ShowToast.showToast("Successful Search", getContext());
                     peoPleList.clear();
                     peoPleList.addAll(response.body().getResults());
-                    StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
+                    GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
                     searchDataAdapter = new SearchDataAdapter(getContext(), peoPleList, SearchFragment.this::onClickItemCharacter);
                     recylerView_movie_search.setLayoutManager(manager);
                     recylerView_movie_search.setAdapter(searchDataAdapter);
@@ -174,7 +177,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
                     ShowToast.showToast("Successful Search", getContext());
                     listtv.clear();
                     listtv.addAll(response.body().getResults());
-                    tVshowTopAdapter = new TVshowTopAdapter(listtv, getContext(), SearchFragment.this::onClickItem);
+                    tVshowTopAdapter = new TVshowTopAdapter(listtv, getContext(), SearchFragment.this::onclick);
                     StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, OrientationHelper.VERTICAL);
                     recylerView_movie_search.setLayoutManager(manager);
                     recylerView_movie_search.setAdapter(tVshowTopAdapter);
@@ -215,6 +218,12 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
 
     @Override
     public void onClickItem(int positon, String id) {
+        startActivity(new Intent(getActivity(), DetailMovieActivity.class).putExtra("KEY_ID", id));
+    }
 
+
+    @Override
+    public void onclick(String postion) {
+        startActivity(new Intent(getActivity(), TvShowDetailActivity.class).putExtra("TV_SHOW", postion));
     }
 }

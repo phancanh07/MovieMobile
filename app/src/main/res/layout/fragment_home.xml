@@ -47,13 +47,31 @@
                     android:orientation="vertical"
                     android:weightSum="4">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/amaranth_bold"
-                        android:text="BEST MOVIE TREND 2021"
-                        android:textSize="20dp" />
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/amaranth_bold"
+                            android:text="BEST MOVIE TREND 2021"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/seemoremovie"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/amaranth_bold"
+                            android:text="SEE MORE"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_trend_movie"
                         android:layout_width="fill_parent"
@@ -61,20 +79,38 @@
                         android:layout_marginTop="10dp"
                         android:layout_weight="1"
                         android:orientation="horizontal" />
+
                     <ProgressBar
                         android:id="@+id/progressBarr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center" />
 
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:layout_weight="1"
-                        android:fontFamily="@font/baloo_da"
-                        android:text="MOVIE RATING 2021"
-                        android:textSize="20dp" />
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/amaranth_bold"
+                            android:text="BEST MOVIE RATING 2021"
+                            android:textSize="20dp" />
+
+                        <TextView
+                            android:id="@+id/seemoremovie2"
+                            android:layout_width="300dp"
+                            android:layout_height="50dp"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/amaranth_bold"
+                            android:text="SEE MORE"
+                            android:textSize="20dp" />
+                    </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recyclerView_rating_movie"
