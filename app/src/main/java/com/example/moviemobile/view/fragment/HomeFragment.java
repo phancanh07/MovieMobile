@@ -226,9 +226,9 @@ public class HomeFragment extends Fragment implements CallBackItem, View.OnClick
     public void onClickItem(int positon, String id) {
         mainActivity.id = id;
         Intent intent = new Intent(getContext(), DetailMovieActivity.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString("KEY_ID", id);
-//        intent.putExtras(bundle);
+        Bundle bundle = new Bundle();
+        bundle.putString("KEY_ID", id);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 

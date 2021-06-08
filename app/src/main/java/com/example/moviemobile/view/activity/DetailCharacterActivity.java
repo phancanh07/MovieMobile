@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.moviemobile.R;
@@ -32,6 +33,8 @@ public class DetailCharacterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_character);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Character");
         recyclerView = findViewById(R.id.recyler_view_detail);
         Intent intent = getIntent();
@@ -42,6 +45,19 @@ public class DetailCharacterActivity extends AppCompatActivity {
         getData(SendID.getId());
 
     }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     private void getData(String id) {
         IfMovieList ifMovieList = ApiRetrofit.getClient().create(IfMovieList.class);

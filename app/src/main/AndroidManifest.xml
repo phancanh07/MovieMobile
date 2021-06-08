@@ -45,7 +45,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".view.activity.DetailCharacterActivity"
-            android:parentActivityName=".view.activity.DetailMovieActivity" />
+            />
         <activity
             android:name=".view.activity.DetailMovieActivity"
             android:parentActivityName=".MainActivity"

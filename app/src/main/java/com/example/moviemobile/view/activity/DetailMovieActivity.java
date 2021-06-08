@@ -73,10 +73,10 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
             getCharacter(title);
             movieSimilar(title);
         } else {
-            title = mainActivity.id;
-            getData(title);
-            getCharacter(title);
-            movieSimilar(title);
+//            title = mainActivity.id;
+//            getData(title);
+//            getCharacter(title);
+//            movieSimilar(title);
         }
         getVideo();
         btn_trailer.setOnClickListener(this::onClick);

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -93,7 +94,6 @@ public class AboutFragment extends Fragment {
         fstore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         id = auth.getCurrentUser().getUid();
-
         textView = view.findViewById(R.id.username_about);
         textView2 = view.findViewById(R.id.number_about);
         logout = view.findViewById(R.id.log_about);
@@ -115,11 +115,11 @@ public class AboutFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.signOut();
                 ShowToast.showToast("Logout", getContext());
                 startActivity(new Intent(getActivity(), LoginUserActivity.class));
             }
         });
+
         return view;
     }
 }
