@@ -13,30 +13,22 @@
         android:id="@+id/txt_time"
         android:layout_width="80dp"
         android:layout_height="40dp"
-
-        android:layout_above="@+id/simple_arc"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="484dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/custom_button_search1"
+        android:fontFamily="@font/chewy"
         android:gravity="center"
         android:text="1"
-        android:textColor="#0303F8"
+        android:textColor="#E63802"
         android:textSize="30dp" />
 
-    <com.leo.simplearcloader.SimpleArcLoader
-        android:id="@+id/simple_arc"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+    <ProgressBar
+        android:id="@+id/progessbar_splass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="100dp"
-        android:visibility="visible"
-        custom:arc_margin="3dp"
-        custom:arc_speed="fast"
-        custom:arc_style="complete_arc">
-
-    </com.leo.simplearcloader.SimpleArcLoader>
+        android:layout_marginBottom="70dp" />
 
 
 </RelativeLayout>

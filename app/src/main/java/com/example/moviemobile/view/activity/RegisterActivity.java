@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.moviemobile.MainActivity;
 import com.example.moviemobile.R;
 import com.example.moviemobile.config.DataLocalManager;
+import com.example.moviemobile.config.ShowToast;
 import com.example.moviemobile.model.acount.Acount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -61,25 +62,33 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void createAcount() {
-        auth.createUserWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-            @Override
-            public void onSuccess(AuthResult authResult) {
-                FirebaseUser user = auth.getCurrentUser();
-                Toast.makeText(getApplicationContext(), "CREATE ", Toast.LENGTH_SHORT).show();
-                DocumentReference reference = firestore.collection("User").document(user.getUid());
-                Map<String, Object> map = new HashMap<>();
-                map.put("username", userName.getText().toString());
-                map.put("password", password.getText().toString());
-                map.put("number", number.getText().toString());
-                reference.set(map);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
+        if (!userName.getText().toString().isEmpty() || !password.getText().toString().isEmpty() || !number.getText().toString().isEmpty()) {
+            if (userName.getText().toString().matches(ShowToast.REGEX) && number.getText().toString().length() >= 6 && number.getText().toString().length() >= 9) {
+                auth.createUserWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        FirebaseUser user = auth.getCurrentUser();
+                        Toast.makeText(getApplicationContext(), "CREATE ", Toast.LENGTH_SHORT).show();
+                        DocumentReference reference = firestore.collection("User").document(user.getUid());
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("username", userName.getText().toString());
+                        map.put("password", password.getText().toString());
+                        map.put("number", number.getText().toString());
+                        reference.set(map);
+                        ShowToast.showToast("Create Acount Success", getApplicationContext());
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        ShowToast.showToast("ERROR", getApplicationContext());
+                    }
+                });
+            } else {
+                ShowToast.showToast("VUI LONG KHONG DE TRONG", getApplicationContext());
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Log.d("ERROR", e.getMessage());
-            }
-        });
+        }
+
     }
 }

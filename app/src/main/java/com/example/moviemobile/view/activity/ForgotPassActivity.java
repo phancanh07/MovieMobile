@@ -36,20 +36,28 @@ public class ForgotPassActivity extends AppCompatActivity {
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                auth.sendPasswordResetEmail(sendMail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        ShowToast.showToast("Reset Link Send To Your Email!",getApplicationContext());
-                        startActivity(new Intent(getApplicationContext(), LoginUserActivity.class));
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull @NotNull Exception e) {
-                        ShowToast.showToast("Reset Link is Not Send!",getApplicationContext());
-                    }
-                });
+                checkEmail();
             }
         });
+    }
+
+    private void checkEmail() {
+        if (sendMail.getText().toString().isEmpty() || !sendMail.getText().toString().matches(ShowToast.REGEX)) {
+            ShowToast.showToast("KHONG DUOC DE TRONG HOAC SAI EMAIL", this);
+        } else {
+            auth.sendPasswordResetEmail(sendMail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    ShowToast.showToast("Reset Link Send To Your Email!", getApplicationContext());
+                    startActivity(new Intent(getApplicationContext(), LoginUserActivity.class));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    ShowToast.showToast("Reset Link is Not Send!", getApplicationContext());
+                }
+            });
+        }
     }
 
 }

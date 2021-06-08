@@ -40,7 +40,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
     private Button btnLogin;
     private CheckBox rememberpassword;
     private TextView creatacout, forgotPassword;
-
+    public static final String REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +69,14 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
                 password.setText(acount.getPassWord());
             }
         }
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin: {
-                sigIn();
+                checkValidate();
                 break;
             }
             case R.id.creatacout: {
@@ -92,34 +93,40 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void sigIn() {
-        validateText();
         auth.signInWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
-                ShowToast.showToast("Login Success", getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
-                Log.d("ERROR", e.getMessage());
+                ShowToast.showToast("ERROR", getApplicationContext());
             }
         });
     }
 
-    private void validateText() {
+    private void checkValidate() {
         boolean bchk = rememberpassword.isChecked();
         try {
-            if (userName.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-                return;
+            if (!userName.getText().toString().isEmpty() || !password.getText().toString().isEmpty()) {
+                if (userName.getText().toString().matches(REGEX) && password.getText().toString().length() >= 6) {
+                    ShowToast.showToast("LOGIN SUCCSESS", this);
+                    Acount acount = new Acount(userName.getText().toString(), password.getText().toString());
+                    DataLocalManager.setUser(acount);
+                    DataLocalManager.setChecked(bchk);
+                    sigIn();
+                } else {
+                    ShowToast.showToast("KIEM TRA LAI EMAIL  HOAC PASSWORD", this);
+                }
             } else {
-                Acount acount = new Acount(userName.getText().toString(), password.getText().toString());
-                DataLocalManager.setUser(acount);
-                DataLocalManager.setChecked(bchk);
+                ShowToast.showToast("KHÔNG ĐỂ TRỐNG", this);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }

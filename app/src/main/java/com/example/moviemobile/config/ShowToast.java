@@ -11,7 +11,7 @@ import com.example.moviemobile.R;
 
 public class ShowToast {
     public Context context;
-
+    public static final String REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
 
     public ShowToast(Context context) {
         this.context = context;
