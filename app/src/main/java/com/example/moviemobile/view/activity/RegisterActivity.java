@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
             } else {
-                ShowToast.showToast("VUI LONG KHONG DE TRONG", getApplicationContext());
+                ShowToast.showToast("KHÔNG THÀNH CÔNG", getApplicationContext());
             }
         }
 
