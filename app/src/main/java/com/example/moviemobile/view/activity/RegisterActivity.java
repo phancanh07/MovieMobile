@@ -76,7 +76,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         map.put("number", number.getText().toString());
                         reference.set(map);
                         ShowToast.showToast("Create Acount Success", getApplicationContext());
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), LoginUserActivity.class));
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

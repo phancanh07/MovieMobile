@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="planets_array">
-        <item>Find People</item>
-        <item>Find Movie</item>
-        <item>Find TVshow</item>
+        <item>Search Actors</item>
+        <item>Search Name Of Movie</item>
+        <item>Search Name Of TVShow</item>
     </string-array>
 </resources>

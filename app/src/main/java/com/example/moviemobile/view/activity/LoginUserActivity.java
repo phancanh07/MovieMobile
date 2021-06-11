@@ -103,6 +103,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
                 ShowToast.showToast("ERROR", getApplicationContext());
+                Log.d("TAG",e.getMessage());
             }
         });
     }
