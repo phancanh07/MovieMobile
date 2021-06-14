@@ -117,7 +117,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
                     CharacterAdapter characterAdapter = new CharacterAdapter(castList, getApplicationContext(), DetailMovieActivity.this::onClickItemCharacter);
                     recyclerView_DV.setLayoutManager(layoutManager);
-                    recyclerView_DV.setHasFixedSize(true);
+                    recyclerView_DV.setHasFixedSize(false);
                     recyclerView_DV.setAdapter(characterAdapter);
                 }
             }
