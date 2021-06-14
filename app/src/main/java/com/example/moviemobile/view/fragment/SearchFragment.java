@@ -100,13 +100,10 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ifMovieList = ApiRetrofit.getClient().create(IfMovieList.class);
         initUI(view);
         btn_search.setOnClickListener(this::onClick);
-
-
         return view;
     }
 
@@ -129,7 +126,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
                 if (response.isSuccessful()) {
-                    ShowToast.showToast("Successful Search", getContext());
                     resultList.clear();
                     resultList.addAll(response.body().getResults());
                     movieListAdapter = new MovieListAdapter(resultList, getContext(), SearchFragment.this::onClickItem);
@@ -152,7 +148,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
             @Override
             public void onResponse(Call<SearchData> call, Response<SearchData> response) {
                 if (response.isSuccessful()) {
-                    ShowToast.showToast("Successful Search", getContext());
                     peoPleList.clear();
                     peoPleList.addAll(response.body().getResults());
                     GridLayoutManager manager = new GridLayoutManager(getContext(), 2);
@@ -174,7 +169,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
             @Override
             public void onResponse(Call<TvTop> call, Response<TvTop> response) {
                 if (response.isSuccessful()) {
-                    ShowToast.showToast("Successful Search", getContext());
+
                     listtv.clear();
                     listtv.addAll(response.body().getResults());
                     tVshowTopAdapter = new TVshowTopAdapter(listtv, getContext(), SearchFragment.this::onclick);
@@ -204,7 +199,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener, Ca
             getSearchTV(textSearch.getEditText().getText().toString());
 
         }
-        ShowToast.showToast("Not Found", getContext());
+       
     }
 
 

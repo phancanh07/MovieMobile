@@ -61,21 +61,21 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+
     private void createAcount() {
         if (!userName.getText().toString().isEmpty() || !password.getText().toString().isEmpty() || !number.getText().toString().isEmpty()) {
-            if (userName.getText().toString().matches(ShowToast.REGEX) && number.getText().toString().length() >= 6 && number.getText().toString().length() >= 9) {
+            if (userName.getText().toString().matches(ShowToast.REGEX) && number.getText().toString().length() >= 6 && number.getText().toString().length() >= 9 &&password.getText().toString().length()>=6) {
                 auth.createUserWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         FirebaseUser user = auth.getCurrentUser();
-                        Toast.makeText(getApplicationContext(), "CREATE ", Toast.LENGTH_SHORT).show();
                         DocumentReference reference = firestore.collection("User").document(user.getUid());
                         Map<String, Object> map = new HashMap<>();
                         map.put("username", userName.getText().toString());
                         map.put("password", password.getText().toString());
                         map.put("number", number.getText().toString());
                         reference.set(map);
-                        ShowToast.showToast("Create Acount Success", getApplicationContext());
+                        ShowToast.showToast("Successfully", getApplicationContext());
                         startActivity(new Intent(getApplicationContext(), LoginUserActivity.class));
                         finish();
                     }
@@ -86,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     }
                 });
             } else {
-                ShowToast.showToast("KHÔNG THÀNH CÔNG", getApplicationContext());
+                ShowToast.showToast("Unsuccessful", getApplicationContext());
             }
         }
 

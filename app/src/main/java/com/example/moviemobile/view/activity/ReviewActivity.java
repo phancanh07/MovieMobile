@@ -60,9 +60,12 @@ public class ReviewActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     int size = response.body().getResults().size();
                     if (size != 0) {
+                        if (response.body().getResults().get(0).getContent().length()==0){
+                            txt_review.setText("No More....");
+                        }
                         txt_review.setText(response.body().getResults().get(0).getContent());
                     } else {
-                        txt_review.setText("Chưa cập nhật review");
+                        txt_review.setText("No More....");
                     }
 
                 }
@@ -84,7 +87,7 @@ public class ReviewActivity extends AppCompatActivity {
                     if (size != 0) {
                         txt_review.setText(response.body().getResults().get(0).getContent());
                     } else {
-                        txt_review.setText("Chưa cập nhật review");
+                        txt_review.setText("No More...");
                     }
 
                 }

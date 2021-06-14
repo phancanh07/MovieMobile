@@ -1,5 +1,6 @@
 package com.example.moviemobile;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,14 +15,20 @@ import com.example.moviemobile.view.fragment.FavoriteFragment;
 import com.example.moviemobile.view.fragment.HomeFragment;
 import com.example.moviemobile.view.fragment.SearchFragment;
 import com.example.moviemobile.view.fragment.TVShowFragment;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.FullScreenContentCallback;
 import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd;
+import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
@@ -32,12 +39,15 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "TAG";
     private MeowBottomNavigation navigation;
     private Fragment fragment = null;
     private SNavigationDrawer sNavigationDrawer;
     Class fragmentClass;
     public static String id = "";
     private AdView mAdView;
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case 4: {
                         fragmentClass = AboutFragment.class;
+                        if (mInterstitialAd != null) {
+                            mInterstitialAd.show(MainActivity.this);
+                        } else {
+                            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+                        }
                         break;
                     }
                     case 2: {
@@ -80,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onDrawerOpening() {
-
+                        Log.d(TAG, "mo");
                     }
 
                     @Override
@@ -109,20 +124,48 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+
+
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(this, "ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+                Log.i(TAG, "onAdLoaded");
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                // Handle the error
+                Log.i(TAG, loadAdError.getMessage());
+                mInterstitialAd = null;
+            }
+        });
+
+
     }
 
     private void initUI() {
-        initAdview();
+//        initAdview();
         sNavigationDrawer = findViewById(R.id.navigationDrawer);
         List<MenuItem> menuItems = new ArrayList<>();
         menuItems.add(new MenuItem("Home", R.drawable.news_bg));
-        menuItems.add(new MenuItem("Favorite", R.drawable.feed_bg));
+        menuItems.add(new MenuItem("Favourite", R.drawable.feed_bg));
         menuItems.add(new MenuItem("TVshow", R.drawable.message_bg));
         menuItems.add(new MenuItem("Search", R.drawable.message_bg));
         menuItems.add(new MenuItem("About", R.drawable.message_bg));
 
         sNavigationDrawer.setMenuItemList(menuItems);
-        sNavigationDrawer.setAppbarTitleTV("Movie");
+        sNavigationDrawer.setAppbarTitleTV("Home");
 
         fragmentClass = HomeFragment.class;
         try {
@@ -134,20 +177,23 @@ public class MainActivity extends AppCompatActivity {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).replace(R.id.container_Frame, fragment).commit();
         }
+
+
     }
 
     private void initAdview() {
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        AdView adView = new AdView(this);
-        adView.setAdSize(AdSize.BANNER);
-        adView.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
+//        mAdView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        mAdView.loadAd(adRequest);
+//        AdView adView = new AdView(this);
+//        adView.setAdSize(AdSize.BANNER);
+//        adView.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+
     }
 
 }

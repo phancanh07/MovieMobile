@@ -43,7 +43,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
     private void checkEmail() {
         if (sendMail.getText().toString().isEmpty() || !sendMail.getText().toString().matches(ShowToast.REGEX)) {
-            ShowToast.showToast("KHONG DUOC DE TRONG HOAC SAI EMAIL", this);
+            ShowToast.showToast("Please ! Enter Text ", this);
         } else {
             auth.sendPasswordResetEmail(sendMail.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override

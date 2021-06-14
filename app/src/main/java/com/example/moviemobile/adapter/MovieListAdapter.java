@@ -69,11 +69,11 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Recy
                 favorite.setType(1);
                 if (MovieDataBase.getInstance(context).movieDAO().checkMovie(resultList.get(position).getId()) == false) {
                     MovieDataBase.getInstance(context).movieDAO().insertMovie(favorite);
-                    ShowToast.showToast("đã thêm ", context);
+                    ShowToast.showToast("Add Successfuly ", context);
                     notifyDataSetChanged();
                 } else {
                     holder.icon.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    ShowToast.showToast("đã xóa ", context);
+                    ShowToast.showToast("Delete Successfuly ", context);
                     MovieDataBase.getInstance(context).movieDAO().delete(resultList.get(position).getId());
                     notifyDataSetChanged();
                 }

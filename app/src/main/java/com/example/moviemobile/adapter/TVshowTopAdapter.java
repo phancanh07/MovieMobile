@@ -63,11 +63,11 @@ public class TVshowTopAdapter extends RecyclerView.Adapter<TVshowTopAdapter.Recy
                 favorite.setType(2);
                 if (MovieDataBase.getInstance(context).movieDAO().checkMovie(resultList.get(position).getId()) == false) {
                     MovieDataBase.getInstance(context).movieDAO().insertMovie(favorite);
-                    ShowToast.showToast("đã thêm ", context);
+                    ShowToast.showToast("Add Successfully", context);
                     notifyDataSetChanged();
                 } else {
                     holder.icon.setImageResource(R.drawable.ic_baseline_favorite_border_24);
-                    ShowToast.showToast("đã xóa ", context);
+                    ShowToast.showToast("Delete Successfully", context);
                     MovieDataBase.getInstance(context).movieDAO().delete(resultList.get(position).getId());
                     notifyDataSetChanged();
                 }

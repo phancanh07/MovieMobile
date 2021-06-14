@@ -3,6 +3,7 @@ package com.example.moviemobile.view.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +33,13 @@ import com.example.moviemobile.model.tvshow.Result;
 import com.example.moviemobile.model.tvshow.TvTop;
 import com.example.moviemobile.view.activity.MoreTvActivity;
 import com.example.moviemobile.view.activity.TvShowDetailActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +67,7 @@ public class TVShowFragment extends Fragment implements CallbackTV, View.OnClick
     private RecyclerView recyclerView, recyclerViewtv_trend;
     private TextView seemore1, seemore2;
     private TVshowTopAdapter movieListAdapter;
-
+    private InterstitialAd mInterstitialAd;
     public TVShowFragment() {
 
     }
@@ -71,12 +79,18 @@ public class TVShowFragment extends Fragment implements CallbackTV, View.OnClick
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_t_v_show, container, false);
         initUI(view);
+
         getMovieTrending(1);
         getTVshowtrending(1);
         seemore1.setOnClickListener(this::onClick);
         seemore2.setOnClickListener(this::onClick);
+
         return view;
     }
+
+
+
+
 
     private void initUI(View view) {
         viewPager = view.findViewById(R.id.viewPager_tvshow);
@@ -91,6 +105,7 @@ public class TVShowFragment extends Fragment implements CallbackTV, View.OnClick
         circleIndicator.setViewPager(viewPager);
         photoSliderAdapter.registerDataSetObserver(circleIndicator.getDataSetObserver());
         autoSlider();
+
     }
 
     private List<PhotoSlider> getList() {
@@ -185,12 +200,12 @@ public class TVShowFragment extends Fragment implements CallbackTV, View.OnClick
 
     @Override
     public void onclick(String postion) {
-        Toast.makeText(getContext(), "đã đc", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(getContext(), TvShowDetailActivity.class).putExtra("TV_SHOW", postion));
     }
 
     @Override
     public void onClick(View v) {
         startActivity(new Intent(getContext(), MoreTvActivity.class));
+
     }
 }

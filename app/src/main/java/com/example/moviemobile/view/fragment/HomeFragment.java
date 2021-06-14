@@ -32,6 +32,13 @@ import com.example.moviemobile.model.rating.TopRating;
 import com.example.moviemobile.model.trend.MovieTrend;
 import com.example.moviemobile.view.activity.DetailMovieActivity;
 import com.example.moviemobile.view.activity.MoreMovieActivity;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +77,7 @@ public class HomeFragment extends Fragment implements CallBackItem, View.OnClick
     List<Result> ratingList = new ArrayList<>();
     private TextView seemore1, seemore2;
 
+    private InterstitialAd mInterstitialAd;
     MainActivity mainActivity;
 
     // TODO: Rename and change types of parameters
@@ -102,11 +110,37 @@ public class HomeFragment extends Fragment implements CallBackItem, View.OnClick
                 }
             }
         });
+        adMob();
         seemore1.setOnClickListener(this::onClick);
         seemore2.setOnClickListener(this::onClick);
 
 
         return view;
+    }
+
+    private void adMob() {
+        MobileAds.initialize(getContext(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        InterstitialAd.load(getContext(), "ca-app-pub-3940256099942544/1033173712", adRequest, new InterstitialAdLoadCallback() {
+            @Override
+            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                // The mInterstitialAd reference will be null until
+                // an ad is loaded.
+                mInterstitialAd = interstitialAd;
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                mInterstitialAd = null;
+            }
+        });
+
     }
 
 
@@ -235,5 +269,10 @@ public class HomeFragment extends Fragment implements CallBackItem, View.OnClick
     @Override
     public void onClick(View v) {
         startActivity(new Intent(getContext(), MoreMovieActivity.class));
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(getActivity());
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
     }
 }

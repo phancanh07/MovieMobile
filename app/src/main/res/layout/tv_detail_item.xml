@@ -67,14 +67,14 @@
                     android:textColor="#E3E4EC"
                     android:textSize="18dp" />
 
-                <TextView
-                    android:id="@+id/day_tvshow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/chewy"
-                    android:text="Day:"
-                    android:textColor="#E3E4EC"
-                    android:textSize="18dp" />
+<!--                <TextView-->
+<!--                    android:id="@+id/day_tvshow"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:fontFamily="@font/chewy"-->
+<!--                    android:text="Day:"-->
+<!--                    android:textColor="#E3E4EC"-->
+<!--                    android:textSize="18dp" />-->
                 <TextView
                     android:id="@+id/last_day"
                     android:layout_width="match_parent"

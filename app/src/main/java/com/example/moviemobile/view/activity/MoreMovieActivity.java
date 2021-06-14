@@ -88,7 +88,7 @@ public class MoreMovieActivity extends AppCompatActivity implements CallBackItem
         nestedScrollView = findViewById(R.id.nedted_movie);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Movie");
+        setTitle("Movies");
 
     }
 

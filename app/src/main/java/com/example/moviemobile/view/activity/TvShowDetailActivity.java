@@ -204,7 +204,6 @@ public class TvShowDetailActivity extends AppCompatActivity implements CallBackI
                 Intent intent = new Intent(this, ReviewActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
-                Log.d("TAG", "da dc");
                 break;
             }
             case R.id.btn_trailer_tv: {

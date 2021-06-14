@@ -96,6 +96,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
         auth.signInWithEmailAndPassword(userName.getText().toString(), password.getText().toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
             @Override
             public void onSuccess(AuthResult authResult) {
+                ShowToast.showToast("LOGIN SUCCSESS", getApplicationContext());
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
@@ -103,7 +104,6 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFailure(@NonNull @NotNull Exception e) {
                 ShowToast.showToast("ERROR", getApplicationContext());
-                Log.d("TAG",e.getMessage());
             }
         });
     }
@@ -113,16 +113,15 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
         try {
             if (!userName.getText().toString().isEmpty() || !password.getText().toString().isEmpty()) {
                 if (userName.getText().toString().matches(REGEX) && password.getText().toString().length() >= 6) {
-                    ShowToast.showToast("LOGIN SUCCSESS", this);
                     Acount acount = new Acount(userName.getText().toString(), password.getText().toString());
                     DataLocalManager.setUser(acount);
                     DataLocalManager.setChecked(bchk);
                     sigIn();
                 } else {
-                    ShowToast.showToast("KIEM TRA LAI EMAIL  HOAC PASSWORD", this);
+                    ShowToast.showToast("Check Email Or Password", this);
                 }
             } else {
-                ShowToast.showToast("KHÔNG ĐỂ TRỐNG", this);
+                ShowToast.showToast("Please! Enter Text", this);
 
             }
         } catch (Exception e) {

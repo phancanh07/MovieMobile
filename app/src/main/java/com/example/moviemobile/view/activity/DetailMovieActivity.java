@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,7 +22,6 @@ import com.example.moviemobile.adapter.MovieListAdapter;
 import com.example.moviemobile.config.ApiRetrofit;
 import com.example.moviemobile.controller.CallBackItem;
 import com.example.moviemobile.controller.CallBackItemCharacter;
-import com.example.moviemobile.controller.CallBackUrl;
 import com.example.moviemobile.controller.IfMovieList;
 import com.example.moviemobile.model.Video;
 import com.example.moviemobile.model.character.Cast;
@@ -31,6 +29,7 @@ import com.example.moviemobile.model.character.Characters;
 import com.example.moviemobile.model.detail.Detail;
 import com.example.moviemobile.model.movie.Example;
 import com.example.moviemobile.model.movie.Result;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +56,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
     String urlPath = "";
     String urlBaner = "";
     String movieName = "";
+    private InterstitialAd mInterstitialAd;
 
 
     @Override
@@ -168,7 +168,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        setTitle("Detail");
+        setTitle("Detail Movies");
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setSubtitleTextColor(Color.WHITE);
     }
@@ -180,6 +180,7 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
         bundle.putString("KEY_ID", id);
         intent.putExtras(bundle);
         startActivity(intent);
+
     }
 
 
@@ -197,9 +198,6 @@ public class DetailMovieActivity extends AppCompatActivity implements CallBackIt
                     if (video.getResults().size() != 0) {
                         url = video.getResults().get(0).getKey();
                     }
-
-
-
                 }
             }
 
