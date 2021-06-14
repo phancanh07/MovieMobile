@@ -110,10 +110,10 @@ public class TVShowFragment extends Fragment implements CallbackTV, View.OnClick
 
     private List<PhotoSlider> getList() {
         List<PhotoSlider> sliderList = new ArrayList<>();
-        sliderList.add(new PhotoSlider(R.drawable.banerwinter));
+        sliderList.add(new PhotoSlider(R.drawable.soldier));
         sliderList.add(new PhotoSlider(R.drawable.wandavission));
-        sliderList.add(new PhotoSlider(R.drawable.sangchi));
-        sliderList.add(new PhotoSlider(R.drawable.disney));
+        sliderList.add(new PhotoSlider(R.drawable.baner1));
+        sliderList.add(new PhotoSlider(R.drawable.baner4));
         return sliderList;
     }
 
